@@ -20,11 +20,22 @@ import {useAlertContext} from "../context/alertContext";
 const LandingSection = () => {
   const {isLoading, response, submit} = useSubmit();
   const { onOpen } = useAlertContext();
-
   const formik = useFormik({
-    initialValues: {},
-    onSubmit: (values) => {},
-    validationSchema: Yup.object({}),
+    initialValues: {
+        firstName:'',
+        email:'',
+        type:'hireMe',
+        comment:''
+    },
+    onSubmit: (values) => {submit('https://john.com/contactme',values)},
+    validationSchema: Yup.object({
+        firstName: Yup.string()
+            .required('Required'),
+        comment: Yup.string()
+            .min(25, 'Must be alteast 25 character')
+            .required('Required'),
+        email: Yup.string().email('Invalid email').required('Required'),
+    }),
   });
 
   return (
@@ -55,12 +66,15 @@ const LandingSection = () => {
                   id="email"
                   name="email"
                   type="email"
+                  {...formik.getFieldProps('email')}
                 />
                 <FormErrorMessage></FormErrorMessage>
               </FormControl>
               <FormControl>
                 <FormLabel htmlFor="type">Type of enquiry</FormLabel>
-                <Select id="type" name="type">
+                <Select id="type" name="type"
+                        {...formik.getFieldProps('type')}
+                >
                   <option value="hireMe">Freelance project proposal</option>
                   <option value="openSource">
                     Open source consultancy session
@@ -74,6 +88,7 @@ const LandingSection = () => {
                   id="comment"
                   name="comment"
                   height={250}
+                  {...formik.getFieldProps('comment')}
                 />
                 <FormErrorMessage></FormErrorMessage>
               </FormControl>
