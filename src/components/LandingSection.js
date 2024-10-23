@@ -18,7 +18,7 @@ const LandingSection = () => (
       <Avatar size="2xl" name="Sage" src="https://bit.ly/sage-adebayo" />
 
     </AvatarGroup>
-    <Heading size="md">Hello, I am BlindSniper</Heading>
+    <Heading size="md">Hello, I am pete!</Heading>
     <Heading size="xl">A frontend developer specialised in React</Heading>
     {/*<p>Pete • © 2022</p>*/}
   </FullScreenSection>
